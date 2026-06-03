@@ -3,79 +3,76 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Appointment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
 
-  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css">
 
-  <style>
+<style>
     h1 {
-      color: white;
-      text-align: center;
-      margin-bottom: 20px;
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     #status {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      color: white;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
     }
-  </style>
+</style>
 
 </head>
+
+<body>
+
+<div class="title-section">
+    <h1>Book Appointment</h1>
+</div>
+
+<form id="bookingForm">
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        required>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+        required>
+
+    <input
+        type="date"
+        id="date"
+        required>
+
+    <input
+        type="time"
+        id="time"
+        required>
+
+    <input
+        type="text"
+        id="reason"
+        placeholder="Reason for Appointment"
+        required>
+
+    <button type="submit">
+        Book Appointment
+    </button>
+
+</form>
+
 <p id="status"></p>
 
 <script src="booking.js"></script>
-<body>
-
-  <div class="title-section">
-    <h1>📅 Book Appointment</h1>
-  </div>
-
-  <form id="bookingForm">
-
-```
-<input
-  type="text"
-  id="name"
-  placeholder="Full Name"
-  required>
-
-<input
-  type="email"
-  id="email"
-  placeholder="Email Address"
-  required>
-
-<input
-  type="date"
-  id="date"
-  required>
-
-<input
-  type="time"
-  id="time"
-  required>
-
-<input
-  type="text"
-  id="reason"
-  placeholder="Reason for Appointment"
-  required>
-
-<button type="submit">
-  Book Appointment
-</button>
-```
-
-  </form>
-
-  <p id="status"></p>
-
-  <script src="booking.js"></script>
 
 </body>
+
 </html>
