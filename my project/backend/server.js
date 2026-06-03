@@ -79,8 +79,10 @@ app.post("/api/booking", async (req, res) => {
   try {
     const booking = await Booking.create(req.body);
 
-    const acceptLink = `http://localhost:${process.env.PORT}/api/booking/${booking._id}/accept`;
-    const rejectLink = `http://localhost:${process.env.PORT}/api/booking/${booking._id}/reject`;
+    const BASE_URL = process.env.BASE_URL;
+
+const acceptLink = `${BASE_URL}/api/booking/${booking._id}/accept`;
+const rejectLink = `${BASE_URL}/api/booking/${booking._id}/reject`;
 
     // Email to King
     try {
@@ -162,4 +164,8 @@ app.get("/api/booking/:id", async (req, res) => {
 });
 
 /* ---------- SERVER ---------- */
-app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT}`));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
