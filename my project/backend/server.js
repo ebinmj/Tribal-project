@@ -47,9 +47,12 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-transporter.verify(err => {
-  if (err) console.error("Email Error:", err);
-  else console.log("Email server ready");
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("Email Config Error:", error);
+  } else {
+    console.log("Email Server Ready");
+  }
 });
 
 /* ---------- AUTH ---------- */
@@ -164,6 +167,31 @@ app.get("/api/booking/:id", async (req, res) => {
   const booking = await Booking.findById(req.params.id);
   if (!booking) return res.status(404).json({ error: "Booking not found" });
   res.json({ status: booking.status });
+});
+/* ---------- USER BOOKINGS ---------- */
+app.get("/api/user/bookings", async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const bookings = await Booking.find({ email });
+
+    res.json(bookings);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to load bookings" });
+  }
+});
+
+/* ---------- KING BOOKINGS ---------- */
+app.get("/api/king/bookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find().sort({ _id: -1 });
+
+    res.json(bookings);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to load bookings" });
+  }
 });
 
 /* ---------- SERVER ---------- */
