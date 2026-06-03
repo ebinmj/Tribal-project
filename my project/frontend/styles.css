@@ -182,18 +182,28 @@ button:active{
 /* ================= STATUS ================= */
 .status{
     font-weight:700;
+    padding:7px 14px;
+    border-radius:20px;
+    display:inline-block;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
 
 .status.pending{
-    color:#ffd54f;
+    background:white;
+    color:#f39c12;
+    border:2px solid #f39c12;
 }
 
 .status.accepted{
-    color:#66ff99;
+    background:white;
+    color:#27ae60;
+    border:2px solid #27ae60;
 }
 
 .status.rejected{
-    color:#ff7675;
+    background:white;
+    color:#d63031;
+    border:2px solid #d63031;
 }
 
 /* ================= ACTION BUTTONS ================= */
