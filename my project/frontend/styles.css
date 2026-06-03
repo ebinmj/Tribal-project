@@ -1,180 +1,261 @@
-/* ---------------- GLOBAL STYLES ---------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ================= GOOGLE FONT ================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f1ea;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+/* ================= BODY ================= */
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.45),
+    rgba(0,0,0,0.45)),
+    url("https://images.unsplash.com/photo-1448375240586-882707db888b");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    padding:20px;
 }
 
-/* ---------------- TITLE SECTION ---------------- */
-.title-section {
-  text-align: center;
-  margin-bottom: 20px;
+/* ================= TITLE ================= */
+.title-section{
+    text-align:center;
+    margin-bottom:25px;
+    color:white;
 }
 
-h2 {
-  font-size: 2rem;
-  color: #1a472a;
+.title-section h2{
+    font-size:2.5rem;
+    font-weight:700;
+    margin-bottom:8px;
 }
 
-/* ---------------- FORM CHOICE (LOGIN / REGISTER SWITCH) ---------------- */
-.form-choice {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+.subtitle{
+    font-size:15px;
+    opacity:.9;
 }
 
-.form-choice label {
-  margin-right: 20px;
-  font-weight: bold;
-  cursor: pointer;
+/* ================= FORM CARD ================= */
+form{
+    width:100%;
+    max-width:420px;
+
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    border-radius:20px;
+    padding:35px;
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.3);
+
+    animation:fadeIn .6s ease;
 }
 
-/* ---------------- FORM STYLES (LOGIN / REGISTER / BOOKING) ---------------- */
-form {
-  background-color: #fff;
-  padding: 20px 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
+/* ================= INPUTS ================= */
 input,
 select,
-textarea,
-button {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+textarea{
+    width:100%;
+    padding:14px 16px;
+    margin:10px 0;
+
+    border:none;
+    outline:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.9);
+
+    font-size:14px;
+    transition:.3s;
 }
 
-textarea {
-  resize: none;
+input:focus,
+select:focus,
+textarea:focus{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 0 0 3px rgba(39,174,96,.3);
 }
 
-/* ---------------- BUTTON STYLES ---------------- */
-button {
-  background-color: #1a472a;
-  color: white;
-  cursor: pointer;
-  border: none;
-  font-weight: bold;
+/* ================= BUTTON ================= */
+button{
+    width:100%;
+    padding:14px;
+
+    border:none;
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:linear-gradient(
+        135deg,
+        #27ae60,
+        #145a32
+    );
+
+    color:white;
+    font-size:15px;
+    font-weight:600;
+
+    transition:.3s;
 }
 
-button:hover {
-  background-color: #155a3a;
+button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,0.25);
 }
 
-/* ---------------- DASHBOARD LAYOUT ---------------- */
-.dashboard-container {
-  width: 100%;
-  max-width: 900px;
+button:active{
+    transform:scale(.98);
 }
 
-/* ---------------- BOOKING CARD (USER + KING) ---------------- */
-.booking-card {
-  background-color: #ffffff;
-  padding: 18px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
-  margin-bottom: 15px;
+/* ================= LOGIN REGISTER LINKS ================= */
+.auth-link{
+    margin-top:18px;
+    text-align:center;
+    color:white;
+    font-size:14px;
 }
 
-.booking-card p {
-  margin: 6px 0;
-  color: #333;
-  font-size: 15px;
+.auth-link a{
+    color:#9cffc8;
+    font-weight:600;
+    text-decoration:none;
 }
 
-/* ---------------- STATUS LABELS ---------------- */
-.status {
-  font-weight: bold;
+.auth-link a:hover{
+    text-decoration:underline;
 }
 
-.status.pending {
-  color: orange;
+/* ================= DASHBOARD ================= */
+.dashboard-container{
+    width:100%;
+    max-width:1000px;
 }
 
-.status.accepted {
-  color: green;
+/* ================= CARDS ================= */
+.booking-card{
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(14px);
+
+    border-radius:18px;
+
+    padding:20px;
+    margin-bottom:18px;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    color:white;
+
+    transition:.3s;
 }
 
-.status.rejected {
-  color: red;
+.booking-card:hover{
+    transform:translateY(-4px);
 }
 
-/* ---------------- KING ACTION BUTTONS ---------------- */
-.action-buttons {
-  margin-top: 12px;
-  display: flex;
-  gap: 10px;
+.booking-card p{
+    margin:8px 0;
 }
 
-.accept-btn {
-  background-color: #1a7f37;
+/* ================= STATUS ================= */
+.status{
+    font-weight:700;
 }
 
-.reject-btn {
-  background-color: #c62828;
+.status.pending{
+    color:#ffd54f;
 }
 
-.accept-btn:hover {
-  background-color: #145c2a;
+.status.accepted{
+    color:#66ff99;
 }
 
-.reject-btn:hover {
-  background-color: #9e1f1f;
+.status.rejected{
+    color:#ff7675;
 }
 
-/* ---------------- NO DATA MESSAGE ---------------- */
-.no-bookings {
-  text-align: center;
-  font-size: 16px;
-  color: #555;
-  margin-top: 20px;
+/* ================= ACTION BUTTONS ================= */
+.action-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
 }
 
-/* ---------------- LINKS (LOGIN ↔ REGISTER) ---------------- */
-.auth-link {
-  margin-top: 10px;
-  text-align: center;
+.accept-btn{
+    background:linear-gradient(
+        135deg,
+        #2ecc71,
+        #27ae60
+    );
 }
 
-.auth-link a {
-  color: #1a472a;
-  font-weight: bold;
-  text-decoration: none;
+.reject-btn{
+    background:linear-gradient(
+        135deg,
+        #ff5f6d,
+        #d63031
+    );
 }
 
-.auth-link a:hover {
-  text-decoration: underline;
+/* ================= NO DATA ================= */
+.no-bookings{
+    color:white;
+    text-align:center;
+    font-size:18px;
+    margin-top:25px;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 600px) {
-  form {
-    width: 90%;
-  }
+/* ================= ANIMATION ================= */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-  .action-buttons {
-    flex-direction: column;
-  }
+/* ================= MOBILE ================= */
+@media(max-width:768px){
 
-  .accept-btn,
-  .reject-btn {
-    width: 100%;
-  }
+    form{
+        padding:25px;
+    }
+
+    .title-section h2{
+        font-size:2rem;
+    }
+
+    .action-buttons{
+        flex-direction:column;
+    }
+
+    .accept-btn,
+    .reject-btn{
+        width:100%;
+    }
 }
