@@ -46,12 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("user", JSON.stringify(result));
 
-      window.location.href =
-        result.user.role === "king"
-          ? "dashboard-king.html"
-          : "dashboard-user.html";
+// Redirect to user dashboard
+window.location.href = "dashboard-user.html";
     });
   }
 
