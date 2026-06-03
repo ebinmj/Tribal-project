@@ -3,7 +3,7 @@ const statusText = document.getElementById("status");
 
 form.addEventListener("submit", async (e) => {
 
-```
+
 e.preventDefault();
 
 const data = {
@@ -54,6 +54,6 @@ try {
     statusText.textContent =
         "❌ " + err.message;
 }
-```
+
 
 });
