@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("user", JSON.stringify(result));
 
 // Redirect to user dashboard
-window.location.href = "dashboard-user.html";
+window.location.href = "website.html";
     });
   }
 
