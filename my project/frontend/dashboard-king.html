@@ -152,7 +152,7 @@ button{
 async function loadBookings() {
   try {
 
-    const res = await fetch("/api/king/bookings");
+    const res = await fetch("https://tribal-project.onrender.com/api/king/bookings");
     const bookings = await res.json();
 
     const tbody = document.getElementById("kingTable");
@@ -225,7 +225,9 @@ async function processBooking(id, action) {
   try {
 
     const res =
-      await fetch(`/api/booking/${id}/${action}`);
+      await fetch(
+    `https://tribal-project.onrender.com/api/booking/${id}/${action}`
+  );
 
     if(res.ok){
 
@@ -239,11 +241,10 @@ async function processBooking(id, action) {
 
     }
 
-  } catch(err){
-
-    console.error(err);
-
-  }
+  } catch (err) {
+  console.error(err);
+  alert("Failed to load bookings");
+}
 }
 
 loadBookings();
