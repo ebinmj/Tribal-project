@@ -1,57 +1,236 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Dashboard</title>
+
 <link rel="stylesheet" href="styles.css">
+
 <style>
-body { font-family: Arial; padding: 20px; }
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-th { background: #f4f4f4; }
+body{
+    padding:30px;
+    color:white;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:2.3rem;
+    color:white;
+    text-shadow:0 2px 10px rgba(0,0,0,.4);
+}
+
+.search-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.search-section input{
+    max-width:350px;
+}
+
+.search-section button{
+    width:auto;
+    padding:12px 18px;
+}
+
+table{
+    width:100%;
+    max-width:1200px;
+    margin:20px auto;
+    border-collapse:collapse;
+
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(14px);
+
+    border-radius:18px;
+    overflow:hidden;
+
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+
+th{
+    background:rgba(20,90,50,.9);
+    color:white;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+
+th,td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+tr:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.status{
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:20px;
+}
+
+.status.pending{
+    background:#ffd54f22;
+    color:#ffd54f;
+    border:1px solid #ffd54f55;
+}
+
+.status.accepted{
+    background:#66ff9922;
+    color:#66ff99;
+    border:1px solid #66ff9955;
+}
+
+.status.rejected{
+    background:#ff767522;
+    color:#ff7675;
+    border:1px solid #ff767555;
+}
+
+.empty{
+    text-align:center;
+    color:#ddd;
+    font-style:italic;
+}
+
+@media(max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    .search-section{
+        flex-direction:column;
+    }
+
+    .search-section input{
+        width:100%;
+    }
+
+    .search-section button{
+        width:100%;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+    th,td{
+        padding:10px;
+    }
+}
 </style>
 
 </head>
+
 <body>
 
-<h2>User Dashboard</h2>
+<h2>📋 My Appointments</h2>
 
-<input type="email" id="userEmail" placeholder="Enter your email" />
-<button onclick="loadUserBookings()">Load Bookings</button>
+<div class="search-section">
+
+<input
+type="email"
+id="userEmail"
+placeholder="Enter your email">
+
+<button onclick="loadUserBookings()">
+Load Bookings
+</button>
+
+</div>
 
 <table>
+
 <thead>
 <tr>
-<th>Date</th><th>Time</th><th>Reason</th><th>Status</th>
+<th>Date</th>
+<th>Time</th>
+<th>Reason</th>
+<th>Status</th>
 </tr>
 </thead>
+
 <tbody id="userTable"></tbody>
+
 </table>
 
 <script>
+
 async function loadUserBookings() {
-  const email = document.getElementById("userEmail").value;
-  if(!email) return alert("Please enter your email");
+
+  const email =
+  document.getElementById("userEmail").value;
+
+  if(!email){
+    alert("Please enter your email");
+    return;
+  }
+
   try {
-    const res = await fetch(`/api/user/bookings?email=${email}`);
+
+    const res =
+    await fetch(`/api/user/bookings?email=${email}`);
+
     const bookings = await res.json();
-    const tbody = document.getElementById("userTable");
+
+    const tbody =
+    document.getElementById("userTable");
+
     tbody.innerHTML = "";
+
+    if(bookings.length === 0){
+
+      tbody.innerHTML = `
+      <tr>
+        <td colspan="4" class="empty">
+          No bookings found
+        </td>
+      </tr>
+      `;
+
+      return;
+    }
+
     bookings.forEach(b => {
+
       tbody.innerHTML += `
-        <tr>
-          <td>${b.date}</td>
-          <td>${b.time}</td>
-          <td>${b.reason}</td>
-          <td>${b.status}</td>
-        </tr>
+      <tr>
+
+        <td>${b.date}</td>
+
+        <td>${b.time}</td>
+
+        <td>${b.reason}</td>
+
+        <td>
+          <span class="status ${b.status}">
+            ${b.status}
+          </span>
+        </td>
+
+      </tr>
       `;
     });
+
   } catch(err) {
+
     console.error(err);
+
+    alert("Failed to load bookings");
+
   }
 }
+
 </script>
 
 </body>
