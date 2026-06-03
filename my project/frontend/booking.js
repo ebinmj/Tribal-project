@@ -9,7 +9,7 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
     reason: reason.value
   };
 
-  await fetch("http://localhost:3000/api/booking", {
+  await fetch("https://tribal-project.onrender.com/api/booking", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)

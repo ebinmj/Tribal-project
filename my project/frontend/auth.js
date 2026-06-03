@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         password: document.getElementById("password").value
       };
 
-      const res = await fetch("http://localhost:3000/api/register", {
+      const res = await fetch("https://tribal-project.onrender.com/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
-      const res = await fetch("http://localhost:3000/api/login", {
+      const res = await fetch("https://tribal-project.onrender.com/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
