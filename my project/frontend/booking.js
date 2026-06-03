@@ -1,64 +1,53 @@
-const API_URL = "https://tribal-project.onrender.com";
-
 const form = document.getElementById("bookingForm");
 const statusText = document.getElementById("status");
 
 form.addEventListener("submit", async (e) => {
 
-e.preventDefault();
+    e.preventDefault();
 
-const data = {
-name: document.getElementById("name").value.trim(),
-email: document.getElementById("email").value.trim(),
-date: document.getElementById("date").value,
-time: document.getElementById("time").value,
-reason: document.getElementById("reason").value.trim()
-};
+    const data = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        reason: document.getElementById("reason").value.trim()
+    };
 
-try {
+    try {
 
-```
-statusText.style.color = "#ffffff";
-statusText.textContent = "Sending booking request...";
+        statusText.style.color = "#ffffff";
+        statusText.textContent = "Sending booking request...";
 
-const res = await fetch(
-  `${API_URL}/api/booking`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  }
-);
+        const res = await fetch(
+            "https://tribal-project.onrender.com/api/booking",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
 
-const result = await res.json();
+        const result = await res.json();
 
-if (!res.ok) {
-  throw new Error(
-    result.error ||
-    result.message ||
-    "Booking failed"
-  );
-}
+        if (!res.ok) {
+            throw new Error(result.error || "Booking failed");
+        }
 
-statusText.style.color = "#66ff99";
-statusText.textContent =
-  "✅ Booking request sent successfully.";
+        statusText.style.color = "#66ff99";
+        statusText.textContent =
+            "✅ Booking request sent successfully.";
 
-form.reset();
-```
+        form.reset();
 
-} catch (err) {
+    } catch (err) {
 
-```
-console.error(err);
+        console.error(err);
 
-statusText.style.color = "#ff7675";
-statusText.textContent =
-  "❌ " + err.message;
-```
-
-}
+        statusText.style.color = "#ff7675";
+        statusText.textContent =
+            "❌ " + err.message;
+    }
 
 });
