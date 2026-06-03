@@ -91,7 +91,8 @@ const acceptLink = `${BASE_URL}/api/booking/${booking._id}/accept`;
 const rejectLink = `${BASE_URL}/api/booking/${booking._id}/reject`;
 
     // Email to King
-    try {
+    try {console.log("EMAIL:", process.env.EMAIL);
+console.log("KING_EMAIL:", process.env.KING_EMAIL);
       await transporter.sendMail({
         to: process.env.KING_EMAIL,
         subject: "New Appointment Request ",
