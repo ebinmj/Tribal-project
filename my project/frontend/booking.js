@@ -1,19 +1,64 @@
-document.getElementById("bookingForm").addEventListener("submit", async e => {
-  e.preventDefault();
+const API_URL = "https://tribal-project.onrender.com";
 
-  const data = {
-    name: name.value,
-    email: email.value,
-    date: date.value,
-    time: time.value,
-    reason: reason.value
-  };
+const form = document.getElementById("bookingForm");
+const statusText = document.getElementById("status");
 
-  await fetch("https://tribal-project.onrender.com/api/booking", {
+form.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const data = {
+name: document.getElementById("name").value.trim(),
+email: document.getElementById("email").value.trim(),
+date: document.getElementById("date").value,
+time: document.getElementById("time").value,
+reason: document.getElementById("reason").value.trim()
+};
+
+try {
+
+```
+statusText.style.color = "#ffffff";
+statusText.textContent = "Sending booking request...";
+
+const res = await fetch(
+  `${API_URL}/api/booking`,
+  {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(data)
-  });
+  }
+);
 
-  alert("Booking request sent");
+const result = await res.json();
+
+if (!res.ok) {
+  throw new Error(
+    result.error ||
+    result.message ||
+    "Booking failed"
+  );
+}
+
+statusText.style.color = "#66ff99";
+statusText.textContent =
+  "✅ Booking request sent successfully.";
+
+form.reset();
+```
+
+} catch (err) {
+
+```
+console.error(err);
+
+statusText.style.color = "#ff7675";
+statusText.textContent =
+  "❌ " + err.message;
+```
+
+}
+
 });

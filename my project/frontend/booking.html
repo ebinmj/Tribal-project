@@ -1,53 +1,81 @@
-<script>
-const API_URL = "https://tribal-project.onrender.com";
+<!DOCTYPE html>
 
-const form = document.getElementById("bookingForm");
-const statusText = document.getElementById("status");
+<html lang="en">
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment</title>
 
-  const data = {
-    name: document.getElementById("name").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    date: document.getElementById("date").value,
-    time: document.getElementById("time").value,
-    reason: document.getElementById("reason").value.trim()
-  };
+  <link rel="stylesheet" href="styles.css">
 
-  try {
-
-    statusText.style.color = "#ffffff";
-    statusText.textContent = "Sending booking request...";
-
-    const res = await fetch(`${API_URL}/api/booking`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      throw new Error(result.error || result.message || "Booking failed");
+  <style>
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    statusText.style.color = "#66ff99";
-    statusText.textContent =
-      "✅ Booking request sent successfully. Waiting for approval.";
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+    }
+  </style>
 
-    form.reset();
+</head>
+<p id="status"></p>
 
-  } catch (err) {
+<script src="booking.js"></script>
+<body>
 
-    console.error(err);
+  <div class="title-section">
+    <h1>📅 Book Appointment</h1>
+  </div>
 
-    statusText.style.color = "#ff7675";
-    statusText.textContent =
-      "❌ " + err.message;
+  <form id="bookingForm">
 
-  }
-});
-</script>
+```
+<input
+  type="text"
+  id="name"
+  placeholder="Full Name"
+  required>
+
+<input
+  type="email"
+  id="email"
+  placeholder="Email Address"
+  required>
+
+<input
+  type="date"
+  id="date"
+  required>
+
+<input
+  type="time"
+  id="time"
+  required>
+
+<input
+  type="text"
+  id="reason"
+  placeholder="Reason for Appointment"
+  required>
+
+<button type="submit">
+  Book Appointment
+</button>
+```
+
+  </form>
+
+  <p id="status"></p>
+
+  <script src="booking.js"></script>
+
+</body>
+</html>
