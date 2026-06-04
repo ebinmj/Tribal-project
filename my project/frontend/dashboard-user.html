@@ -133,6 +133,9 @@ tr:hover{
 </head>
 
 <body>
+    <div class="navbar">
+    <button onclick="goHome()">Home</button>
+</div>
 
 <h2>📋 My Appointments</h2>
 
@@ -229,6 +232,15 @@ async function loadUserBookings() {
     alert("Failed to load bookings");
 
   }
+}
+
+</script>
+<script>
+
+function goHome(){
+
+    window.location.href = "website.html";
+
 }
 
 </script>
