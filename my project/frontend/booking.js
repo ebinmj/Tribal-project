@@ -60,44 +60,4 @@ setTimeout(() => {
 
 
 });
-async function checkBookingStatus() {
 
-    const bookingId = localStorage.getItem("bookingId");
-
-    if (!bookingId) return;
-
-    try {
-
-        const res = await fetch(
-            `https://tribal-project.onrender.com/api/booking/${bookingId}`
-        );
-
-        const data = await res.json();
-
-        const box = document.getElementById("approvalStatus");
-
-        if (box) {
-
-            if (data.status === "accepted") {
-                box.style.color = "#66ff99";
-            }
-            else if (data.status === "rejected") {
-                box.style.color = "#ff7675";
-            }
-            else {
-                box.style.color = "#ffffff";
-            }
-
-            box.innerHTML =
-            `Current Status: <b>${data.status.toUpperCase()}</b>`;
-        }
-
-    } catch (err) {
-
-        console.error(err);
-
-    }
-}
-checkBookingStatus();
-
-setInterval(checkBookingStatus, 5000);
