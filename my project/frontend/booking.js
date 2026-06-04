@@ -72,8 +72,23 @@ async function checkBookingStatus() {
 
         const data = await res.json();
 
-        document.getElementById("approvalStatus").innerHTML =
-            `Current Status: <b>${data.status}</b>`;
+        const box = document.getElementById("approvalStatus");
+
+        if (box) {
+
+            if (data.status === "accepted") {
+                box.style.color = "#66ff99";
+            }
+            else if (data.status === "rejected") {
+                box.style.color = "#ff7675";
+            }
+            else {
+                box.style.color = "#ffffff";
+            }
+
+            box.innerHTML =
+            `Current Status: <b>${data.status.toUpperCase()}</b>`;
+        }
 
     } catch (err) {
 
