@@ -43,9 +43,11 @@ localStorage.setItem("bookingId", result.bookingId);
 
     statusText.style.color = "#66ff99";
     statusText.textContent =
-        "✅ Booking request sent successfully. Waiting for approval.";
+    "✅ Booking request sent successfully.";
 
-    form.reset();
+setTimeout(() => {
+    window.location.href = "dashboard-user.html";
+}, 1500);
 
 } catch (err) {
 

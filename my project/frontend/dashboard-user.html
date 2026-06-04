@@ -179,7 +179,7 @@ async function loadUserBookings() {
   try {
 
     const res =
-    await fetch(`/api/user/bookings?email=${email}`);
+    await fetch(`https://tribal-project.onrender.com/api/user/bookings?email=${email}`);
 
     const bookings = await res.json();
 
