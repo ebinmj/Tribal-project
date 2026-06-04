@@ -192,7 +192,7 @@ app.get("/api/king/bookings", async (req, res) => {
     res.json(bookings);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to load bookings" });
+    res.status(500).json({ error: "Failed to load Bookings" });
   }
 });
 
