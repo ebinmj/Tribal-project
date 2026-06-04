@@ -245,8 +245,28 @@
         }
     </style>
 </head>
-
+<script>
+function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "index.html";
+}
+</script>
 <body>
+    <div class="nav-buttons">
+
+  <button onclick="window.location.href='booking.html'">
+    Book Appointment
+  </button>
+
+  <button onclick="window.location.href='dashboard-user.html'">
+    My Appointments
+  </button>
+
+  <button onclick="logout()">
+    Logout
+  </button>
+
+</div>
 
     <nav class="navbar">
         <div class="logo">Kovilmala Kingdom</div>
@@ -256,6 +276,7 @@
             <button class="nav-btn" id="btn-culture" onclick="showPage('culture')">Traditions</button>
             <button class="nav-btn" id="btn-history" onclick="showPage('history')">History</button>
             <button class="nav-btn" id="btn-gallery" onclick="showPage('gallery')">Gallery</button>
+            <button class="nav-btn" onclick="goToAppointments()">My Appointments</button>
             <button class="nav-btn" id="btn-contact" onclick="goToBooking()">Book Appointment</button>
         </div>
     </nav>
@@ -591,7 +612,9 @@
     function goToBooking() {
     window.location.href = "booking.html";  
     }
-
+function goToAppointments() {
+    window.location.href = "dashboard-user.html";
+}
 
     </script>
 </body>
