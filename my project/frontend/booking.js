@@ -32,6 +32,7 @@ try {
 
     const result = await res.json();
 
+localStorage.setItem("bookingId", result.bookingId);
     if (!res.ok) {
         throw new Error(
             result.error ||
@@ -57,3 +58,29 @@ try {
 
 
 });
+async function checkBookingStatus() {
+
+    const bookingId = localStorage.getItem("bookingId");
+
+    if (!bookingId) return;
+
+    try {
+
+        const res = await fetch(
+            `https://tribal-project.onrender.com/api/booking/${bookingId}`
+        );
+
+        const data = await res.json();
+
+        document.getElementById("approvalStatus").innerHTML =
+            `Current Status: <b>${data.status}</b>`;
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
+}
+checkBookingStatus();
+
+setInterval(checkBookingStatus, 5000);
