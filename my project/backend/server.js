@@ -105,8 +105,8 @@ const rejectLink = `${BASE_URL}/api/booking/${booking._id}/reject`;
   console.log("Attempting to send email to:", process.env.KING_EMAIL);
 
   await transporter.sendMail({
-    from: `"Tribal Appointments" <${process.env.SMTP_USER}>`,
-    to: process.env.KING_EMAIL,
+  from: '"Tribal Appointments" <ebinmathewsjohn@gmail.com>',
+  to: process.env.KING_EMAIL,
     subject: "New Appointment Request",
     html: `
       <h2>New Appointment Request</h2>
@@ -157,7 +157,8 @@ app.get("/api/booking/:id/accept", async (req, res) => {
 
   try {
     await transporter.sendMail({
-      to: booking.email,
+  from: '"Tribal Appointments" <ebinmathewsjohn@gmail.com>',
+  to: booking.email,
       subject: "Your Appointment is Accepted 👑",
       html: `<h2>Your Appointment is Accepted</h2><p>Date: ${booking.date}</p><p>Time: ${booking.time}</p>`
     });
@@ -178,7 +179,8 @@ app.get("/api/booking/:id/reject", async (req, res) => {
 
   try {
     await transporter.sendMail({
-      to: booking.email,
+  from: '"Tribal Appointments" <ebinmathewsjohn@gmail.com>',
+  to: booking.email,
       subject: "Your Appointment is Rejected ❌",
       html: `<p>Sorry, your appointment request was rejected.</p>`
     });
