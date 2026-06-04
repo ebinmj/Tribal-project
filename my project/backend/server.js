@@ -39,6 +39,10 @@ mongoose
   .catch(err => console.error("Mongo Error:", err));
 
 /* ---------- EMAIL ---------- */
+console.log("SMTP_USER:", process.env.SMTP_USER);
+console.log("SMTP_PASS exists:", !!process.env.SMTP_PASS);
+console.log("KING_EMAIL:", process.env.KING_EMAIL);
+
 const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
   port: 587,
@@ -46,16 +50,12 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
-  },
-  connectionTimeout: 30000,
-  greetingTimeout: 30000
+  }
 });
-console.log("SMTP_USER:", process.env.SMTP_USER);
-console.log("SMTP_PASS exists:", !!process.env.SMTP_PASS);
 
 transporter.verify((error, success) => {
   if (error) {
-    console.error("SMTP VERIFY ERROR:", error);
+    console.log("SMTP VERIFY ERROR:", error);
   } else {
     console.log("SMTP READY");
   }
