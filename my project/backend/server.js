@@ -39,23 +39,27 @@ mongoose
   .catch(err => console.error("Mongo Error:", err));
 
 /* ---------- EMAIL ---------- */
+
 console.log("SMTP_USER:", process.env.SMTP_USER);
 console.log("SMTP_PASS exists:", !!process.env.SMTP_PASS);
 console.log("KING_EMAIL:", process.env.KING_EMAIL);
+console.log("BASE_URL:", process.env.BASE_URL);
 
 const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
-  port: 587,
+  port: 2525,
   secure: false,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
-  }
+  },
+  connectionTimeout: 30000,
+  greetingTimeout: 30000
 });
 
 transporter.verify((error, success) => {
   if (error) {
-    console.log("SMTP VERIFY ERROR:", error);
+    console.error("SMTP VERIFY ERROR:", error);
   } else {
     console.log("SMTP READY");
   }
@@ -97,29 +101,45 @@ const acceptLink = `${BASE_URL}/api/booking/${booking._id}/accept`;
 const rejectLink = `${BASE_URL}/api/booking/${booking._id}/reject`;
 
     // Email to King
-    try {console.log("SMTP_USER:", process.env.SMTP_USER);
-console.log("KING_EMAIL:", process.env.KING_EMAIL);
-      await transporter.sendMail({
-        to: process.env.KING_EMAIL,
-        subject: "New Appointment Request ",
-        html: `
-          <h2>New Appointment Request</h2>
-          <p><b>Name:</b> ${booking.name}</p>
-          <p><b>Email:</b> ${booking.email}</p>
-          <p><b>Date:</b> ${booking.date}</p>
-          <p><b>Time:</b> ${booking.time}</p>
-          <p><b>Reason:</b> ${booking.reason}</p>
-          <br>
-          <a href="${acceptLink}" style="background:#28a745;color:white;padding:10px 15px;text-decoration:none;border-radius:5px;">✅ ACCEPT</a>
-          &nbsp;
-          <a href="${rejectLink}" style="background:#dc3545;color:white;padding:10px 15px;text-decoration:none;border-radius:5px;">❌ REJECT</a>
-        `
-      });
-      console.log("Email sent to King");
-    } catch (err) {
-      console.error("Failed to send email to King:", err);
-    }
+    try {
+  console.log("Attempting to send email to:", process.env.KING_EMAIL);
 
+  await transporter.sendMail({
+    from: `"Tribal Appointments" <${process.env.SMTP_USER}>`,
+    to: process.env.KING_EMAIL,
+    subject: "New Appointment Request",
+    html: `
+      <h2>New Appointment Request</h2>
+
+      <p><b>Name:</b> ${booking.name}</p>
+      <p><b>Email:</b> ${booking.email}</p>
+      <p><b>Date:</b> ${booking.date}</p>
+      <p><b>Time:</b> ${booking.time}</p>
+      <p><b>Reason:</b> ${booking.reason}</p>
+
+      <br>
+
+      <a href="${acceptLink}"
+      style="background:#28a745;color:white;padding:10px 15px;text-decoration:none;border-radius:5px;">
+      ✅ ACCEPT
+      </a>
+
+      &nbsp;
+
+      <a href="${rejectLink}"
+      style="background:#dc3545;color:white;padding:10px 15px;text-decoration:none;border-radius:5px;">
+      ❌ REJECT
+      </a>
+    `
+  });
+
+  console.log("EMAIL SENT SUCCESSFULLY");
+
+} catch (err) {
+
+  console.error("EMAIL SEND ERROR:", err);
+
+}
     res.json({ message: "Booking request sent to King", bookingId: booking._id });
   } catch (err) {
     console.error(err);
